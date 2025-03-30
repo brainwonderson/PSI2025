@@ -10,9 +10,9 @@
     <div class="text-center">
         <h1 class="text-xl font-bold text-black">WELCOME TO Dashboard LOKA POM TOBA</h1>
         <div class="flex justify-center my-4">
-            <img src="logo.png" alt="Badan POM" class="h-16">
+            <img src="/image/lokapom.png" alt="Badan POM" class="h-32 w-24">
         </div>
-        <button class="bg-green-500 text-black font-bold py-2 px-6 rounded-lg hover:bg-green-600">LOGIN</button>
+        <a href="{{ route('account.login') }}" class="bg-green-500 text-black font-bold py-2 px-6 rounded-lg hover:bg-green-600">LOGIN</a>
     </div>
 </body>
 </html>

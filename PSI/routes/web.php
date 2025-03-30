@@ -3,9 +3,10 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Home;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::group(['prefix' => 'account'], function(){
@@ -22,11 +23,12 @@ Route::group(['prefix' => 'account'], function(){
    Route::group(['middleware' => 'auth'], function(){
     Route::get('logout',[LoginController::class,'logout'])->name('account.logout');
     Route::get('dashboard',[DashboardController::class,'index'])->name('account.dashboard');
-
-
    });
    
 });
+
+Route::resource('/tickets', \App\Http\Controllers\TicketController::class);
+Route::get('meet', [Home::class, 'test'])->name('meet');
 
 
 
