@@ -19,6 +19,11 @@ class LoginController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required'
+        ],
+        [
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'password.required' => 'Password tidak boleh kosong.'
         ]);
 
         if($validator->passes()){
@@ -26,7 +31,7 @@ class LoginController extends Controller
             if(Auth::attempt(['email' => $request->email,'password' => $request->password])){
                 return redirect()->route('account.dashboard');
             } else{
-                return redirect()->route('account.login')->with('error', 'Either email or password is wrong');
+                return redirect()->route('account.login')->with('error', 'Email atau password salah');
 
             }
 
@@ -42,10 +47,21 @@ class LoginController extends Controller
 
     public function processRegister(Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'name' => 'required|string|max:50',
             'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed'
-        ]);
+            'password' => 'required|max:24|confirmed',
+        ],
+        [
+            'name.required' => 'Nama wajib diisi.',
+            'name.max' => 'Nama tidak boleh lebih dari 50 karakter.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'password.required' => 'Password tidak boleh kosong.',
+            'password.max' => 'Password tidak boleh lebih dari 24 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.'
+        ]
+    );
     
         if($validator->passes()){
             $user = new User();
