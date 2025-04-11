@@ -66,6 +66,11 @@ class TicketController extends Controller
             'petugas' => 'required',
             'status' => 'required',
             'survey' => 'required',
+        ], [
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama tidak boleh lebih dari 50 karakter.',
+            'no_telp.required' => 'Nomor telepon wajib diisi.',
+            'no_telp.max' => 'Nomor telepon tidak boleh lebih dari 13 karakter.',
         ]);
 
         Ticket::create([

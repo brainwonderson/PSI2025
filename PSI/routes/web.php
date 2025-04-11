@@ -29,7 +29,7 @@ Route::group(['prefix' => 'account'], function(){
 });
 
 Route::resource('/tickets', \App\Http\Controllers\TicketController::class);
-Route::get('meet', [Home::class, 'test'])->name('meet');
+// Route::get('meet', [Home::class, 'test'])->name('meet');
 
 Route::get('send-wa', function(){
     $response = Http::withHeaders([
@@ -40,6 +40,16 @@ Route::get('send-wa', function(){
     ]);
     dd(json_decode($response, true));
 });
+
+Route::post('meet', [Home::class, 'createMeeting'])->name('meet');
+Route::get('meet', function () {
+    return view('zoom.create'); // View untuk form
+})->name('meet.form');
+
+Route::post('meet', [Home::class, 'createMeeting'])->name('meet');
+
+
+
 
 
 
