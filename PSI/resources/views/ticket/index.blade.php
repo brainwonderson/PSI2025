@@ -24,17 +24,17 @@
                                         <th>Nama</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Alamat</th>
-                                        <th>Email</th>
-                                        <th>Negara</th>
+                                        {{-- <th>Email</th> --}}
+                                        {{-- <th>Negara</th>
                                         <th>Provinsi</th>
-                                        <th>Kota/Kab</th>
+                                        <th>Kota/Kab</th> --}}
                                         <th>No. Telp</th>
-                                        <th>No. Fax</th>
-                                        <th>Pekerjaan</th>
-                                        <th>Usia</th>
-                                        <th>Layanan</th>
-                                        <th>Tanggal</th>
-                                        <th>Petugas</th>
+                                        {{-- <th>No. Fax</th> --}}
+                                        {{-- <th>Pekerjaan</th> --}}
+                                        {{-- <th>Usia</th> --}}
+                                        {{-- <th>Layanan</th> --}}
+                                        {{-- <th>Tanggal</th> --}}
+                                        {{-- <th>Petugas</th> --}}
                                         <th>Status</th>
                                         <th>Survey</th>
                                         <th scope="col" style="width: 20%">ACTIONS</th>
@@ -46,17 +46,17 @@
                                             <td>{{ $ticket->nama }}</td>
                                             <td>{{ $ticket->jenis_kelamin }}</td>
                                             <td>{{ $ticket->alamat }}</td>
-                                            <td>{{ $ticket->email }}</td>
+                                            {{-- <td>{{ $ticket->email }}</td>
                                             <td>{{ $ticket->negara }}</td>
                                             <td>{{ $ticket->provinsi }}</td>
-                                            <td>{{ $ticket->kota }}</td>
+                                            <td>{{ $ticket->kota }}</td> --}}
                                             <td>{{ $ticket->no_telp }}</td>
-                                            <td>{{ $ticket->no_fax ?? '-' }}</td>
+                                            {{-- <td>{{ $ticket->no_fax ?? '-' }}</td>
                                             <td>{{ $ticket->pekerjaan }}</td>
                                             <td>{{ $ticket->usia }}</td>
-                                            <td>{{ $ticket->layanan }}</td>
-                                            <td>{{ $ticket->tanggal }}</td>
-                                            <td>{{ $ticket->petugas }}</td>
+                                            <td>{{ $ticket->layanan }}</td> --}}
+                                            {{-- <td>{{ $ticket->tanggal }}</td>
+                                            <td>{{ $ticket->petugas }}</td> --}}
                                             <td>{{ $ticket->status }}</td>
                                             <td>{{ $ticket->survey }}</td>
                                             <td>
