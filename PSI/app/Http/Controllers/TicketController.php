@@ -65,6 +65,7 @@ class TicketController extends Controller
             'tanggal' => 'required',
             'petugas' => 'required',
             'status' => 'required',
+            'survey' => 'required',
         ]);
 
         Ticket::create([
@@ -83,6 +84,7 @@ class TicketController extends Controller
             'tanggal' => $request->tanggal,
             'petugas' => $request->petugas,
             'status' => $request->status,
+            'survey' => $request->survey,
         ]);
 
         return redirect()->route('tickets.index')->with('success', 'Tiket berhasil dibuat');
@@ -143,6 +145,7 @@ class TicketController extends Controller
             'tanggal' => 'required',
             'petugas' => 'required',
             'status' => 'required',
+            'survey' => 'required',
         ]);
 
         $ticket = Ticket::findOrFail($id);
@@ -163,6 +166,7 @@ class TicketController extends Controller
             'tanggal' => $request->tanggal,
             'petugas' => $request->petugas,
             'status' => $request->status,
+            'survey' => $request->survey,
         ]);
 
         return redirect()->route('tickets.index')->with('success', 'Tiket berhasil diupdate');

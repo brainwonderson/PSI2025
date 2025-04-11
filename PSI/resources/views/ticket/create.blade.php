@@ -124,6 +124,11 @@
                                 @error('status') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
 
+                            <div class="mb-3">
+                                <label class="form-label">Survey</label>
+                                <input type="text" name="survey" class="form-control @error('survey') is-invalid @enderror" value="{{ old('survey') }}" required>
+                            </div>
+
                             <button type="submit" class="btn btn-primary w-100">Simpan</button>
                         </form>
                     </div>

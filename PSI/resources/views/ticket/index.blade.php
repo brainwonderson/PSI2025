@@ -36,6 +36,7 @@
                                         <th>Tanggal</th>
                                         <th>Petugas</th>
                                         <th>Status</th>
+                                        <th>Survey</th>
                                         <th scope="col" style="width: 20%">ACTIONS</th>
                                     </tr>
                                 </thead>
@@ -57,6 +58,7 @@
                                             <td>{{ $ticket->tanggal }}</td>
                                             <td>{{ $ticket->petugas }}</td>
                                             <td>{{ $ticket->status }}</td>
+                                            <td>{{ $ticket->survey }}</td>
                                             <td>
                                                 <a href="{{ route('tickets.show', $ticket->id) }}" class="btn btn-dark btn-sm">SHOW</a>
                                                 <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-primary btn-sm">EDIT</a>

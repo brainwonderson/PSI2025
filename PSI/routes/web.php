@@ -36,7 +36,7 @@ Route::get('send-wa', function(){
         'Authorization' => 'sJKyRptUdnqLVpKCHHvF',
     ])->post('https://api.fonnte.com/send' , [
         'target' => '6282298630250',
-        'message' => 'Hello from Fonnte API',
+        'message' => 'https://us04web.zoom.us/j/77013509340?pwd=AG3L6fTR3WoyDdb2hBT9FJKlRysbih.1',
     ]);
     dd(json_decode($response, true));
 });

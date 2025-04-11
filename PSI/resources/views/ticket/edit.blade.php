@@ -100,6 +100,11 @@
                                 </select>
                             </div>
 
+                            <div class="mb-3">
+                                <label class="form-label">Survey</label>
+                                <input type="text" name="survey" class="form-control" value="{{ $ticket->survey }}">
+                            </div>
+
                             <button type="submit" class="btn btn-success">Update</button>
                             <a href="{{ route('tickets.index') }}" class="btn btn-secondary">Batal</a>
                         </form>

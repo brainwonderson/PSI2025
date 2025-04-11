@@ -30,6 +30,7 @@
                                 <tr><th>Tanggal</th><td>{{ $ticket->tanggal }}</td></tr>
                                 <tr><th>Petugas</th><td>{{ $ticket->petugas }}</td></tr>
                                 <tr><th>Status</th><td>{{ $ticket->status }}</td></tr>
+                                <tr><th>Survey</th><td>{{ $ticket->survey }}</td></tr>
                             </tbody>
                         </table>
                     </div>

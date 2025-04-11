@@ -30,6 +30,7 @@ class Ticket extends Model
         'layanan',
         'tanggal',
         'petugas',
-        'status'
+        'status',
+        'survey'
     ];
 }
