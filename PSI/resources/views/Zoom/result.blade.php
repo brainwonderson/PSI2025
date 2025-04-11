@@ -20,7 +20,6 @@
             <p><strong>Password:</strong> {{ $response['password'] ?? '-' }}</p>
         </div>
     </div>
-
+    <a href="{{ route('account.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
 </body>
 </html>
-    
