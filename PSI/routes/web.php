@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home;
+use Illuminate\Support\Facades\Http;
 
 Route::get('/', function () {
     return view('home');
@@ -29,6 +30,16 @@ Route::group(['prefix' => 'account'], function(){
 
 Route::resource('/tickets', \App\Http\Controllers\TicketController::class);
 Route::get('meet', [Home::class, 'test'])->name('meet');
+
+Route::get('send-wa', function(){
+    $response = Http::withHeaders([
+        'Authorization' => 'sJKyRptUdnqLVpKCHHvF',
+    ])->post('https://api.fonnte.com/send' , [
+        'target' => '6282298630250',
+        'message' => 'Hello from Fonnte API',
+    ]);
+    dd(json_decode($response, true));
+});
 
 
 

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('petugas');
             $table->enum('status',['Buka', 'Selesai']);
+            $table->text('survey');
             $table->timestamps();
         });
         

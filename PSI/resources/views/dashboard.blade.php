@@ -43,7 +43,7 @@
          <a href="#">&#9673; DashBoard</a>
          <a href="/tickets">&#128196; Tiket</a>
          <a href="/meet">&#9638; Zoom</a>
-         <a href="#">&#10148; Statistik</a>
+         <a href="#">&#10148; WhatsApp</a>
       </div>
       <div class="content">
          <nav class="navbar navbar-light bg-primary p-2">

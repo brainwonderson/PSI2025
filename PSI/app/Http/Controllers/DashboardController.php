@@ -14,6 +14,7 @@ class DashboardController extends Controller
         $totalTickets = Ticket::count();
         $bukaTickets = Ticket::where('status', 'Buka')->count();
         $selesaiTickets = Ticket::where('status', 'Selesai')->count();
+        
 
         return view('dashboard', compact('totalTickets', 'bukaTickets', 'selesaiTickets'));
     }
