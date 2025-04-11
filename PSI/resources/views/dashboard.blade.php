@@ -43,7 +43,7 @@
          <a href="#">&#9673; DashBoard</a>
          <a href="/tickets">&#128196; Tiket</a>
          <a href="/meet">&#9638; Zoom</a>
-         <a href="#">&#10148; WhatsApp</a>
+         <a href="#">&#10148; Statistik</a>
       </div>
       <div class="content">
          <nav class="navbar navbar-light bg-primary p-2">
@@ -73,30 +73,35 @@
             <div class="mt-4">
                <canvas id="ticketChart"></canvas>
             </div>
-         </div>
-      </div>
-      <script>
-         var ctx = document.getElementById('ticketChart').getContext('2d');
-         var ticketChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-               labels: ['Total Tiket', 'Buka Tiket', 'Selesai Tiket'],
-               datasets: [{
-                  label: 'Jumlah Tiket',
-                  data: [{{ $totalTickets }}, {{ $bukaTickets }}, {{ $selesaiTickets }}],
-                  backgroundColor: ['blue', 'green', 'red']
-               }]
-            },
-            options: {
-               responsive: true,
-               scales: {
-                  y: {
-                     beginAtZero: true
-                  }
-               }
-            }
-         });
-      </script>
+            <div class="mt-4">
+               <canvas id="surveyChart"></canvas>
+           </div>
+           
+           <script>
+               var ctxSurvey = document.getElementById('surveyChart').getContext('2d');
+               var surveyChart = new Chart(ctxSurvey, {
+                   type: 'pie',
+                   data: {
+                       labels: ['Mutu Sangat Baik', 'Mutu Baik', 'Mutu Kurang Baik', 'Mutu Tidak Baik'],
+                       datasets: [{
+                           label: 'Survey Mutu Pelayanan',
+                           data: [{{ $surveyData['Sangat Baik'] }}, {{ $surveyData['Baik'] }}, {{ $surveyData['Kurang Baik'] }}, {{ $surveyData['Tidak Baik'] }}],
+                           backgroundColor: ['#6495ED', '#FFFFFF', '#FFD700', '#FF0000'],
+                           borderColor: ['#000000', '#000000', '#000000', '#000000'],
+                           borderWidth: 1
+                       }]
+                   },
+                   options: {
+                       responsive: true,
+                       plugins: {
+                           legend: {
+                               position: 'bottom'
+                           }
+                       }
+                   }
+               });
+           </script>
+           
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
    </body>
 </html>
