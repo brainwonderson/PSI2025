@@ -20,7 +20,7 @@
                             
                             <div class="mb-3">
                                 <label class="form-label">Nama</label>
-                                <input type="text" name="nama" class="form-control" value="{{ $ticket->nama }}" required>
+                                <input type="text" name="nama" class="form-control" value="{{ $ticket->nama }}" required maxlength="50">
                             </div>
 
                             <div class="mb-3">
@@ -58,7 +58,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">No. Telp</label>
-                                <input type="text" name="no_telp" class="form-control" value="{{ $ticket->no_telp }}">
+                                <input type="text" name="no_telp" class="form-control" value="{{ $ticket->no_telp }}" required maxlength="13">
                             </div>
 
                             <div class="mb-3">
