@@ -74,34 +74,66 @@
                <canvas id="ticketChart"></canvas>
             </div>
             <div class="mt-4">
-               <canvas id="surveyChart"></canvas>
-           </div>
-           
-           <script>
-               var ctxSurvey = document.getElementById('surveyChart').getContext('2d');
-               var surveyChart = new Chart(ctxSurvey, {
-                   type: 'pie',
-                   data: {
-                       labels: ['Mutu Sangat Baik', 'Mutu Baik', 'Mutu Kurang Baik', 'Mutu Tidak Baik'],
-                       datasets: [{
-                           label: 'Survey Mutu Pelayanan',
-                           data: [{{ $surveyData['Sangat Baik'] }}, {{ $surveyData['Baik'] }}, {{ $surveyData['Kurang Baik'] }}, {{ $surveyData['Tidak Baik'] }}],
-                           backgroundColor: ['#6495ED', '#FFFFFF', '#FFD700', '#FF0000'],
-                           borderColor: ['#000000', '#000000', '#000000', '#000000'],
-                           borderWidth: 1
-                       }]
-                   },
-                   options: {
-                       responsive: true,
-                       plugins: {
-                           legend: {
-                               position: 'bottom'
-                           }
-                       }
-                   }
-               });
-           </script>
-           
+               <h4>Survey Mutu Pelayanan</h4>
+               <canvas id="surveyChart" width="400" height="400"></canvas>
+            </div>
+         </div>
+      </div>
+      <script>
+         var ctx = document.getElementById('ticketChart').getContext('2d');
+         var ticketChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+               labels: ['Total Tiket', 'Buka Tiket', 'Selesai Tiket'],
+               datasets: [{
+                  label: 'Jumlah Tiket',
+                  data: [{{ $totalTickets }}, {{ $bukaTickets }}, {{ $selesaiTickets }}],
+                  backgroundColor: ['blue', 'green', 'red']
+               }]
+            },
+            options: {
+               responsive: true,
+               scales: {
+                  y: {
+                     beginAtZero: true
+                  }
+               }
+            }
+         });
+
+         var ctxSurvey = document.getElementById('surveyChart').getContext('2d');
+         var surveyChart = new Chart(ctxSurvey, {
+            type: 'pie',
+            data: {
+               labels: [
+                     'Mutu Pelayanan Sangat Baik (88,31 - 100,00)',
+                     'Mutu Pelayanan Baik (76,61 - 88,30)',
+                     'Mutu Pelayanan Kurang Baik (65,00 - 76,60)',
+                     'Mutu Pelayanan Tidak Baik (25,00 - 64,99)'
+               ],
+               datasets: [{
+                     data: [
+                        {{ $surveyData['Sangat Baik'] }},
+                        {{ $surveyData['Baik'] }},
+                        {{ $surveyData['Kurang Baik'] }},
+                        {{ $surveyData['Tidak Baik'] }}
+                     ],
+                     backgroundColor: ['#86B7E1', '#FFFFFF', '#FFC107', '#DC3545'],
+                     borderColor: ['#000', '#000', '#000', '#000'],
+                     borderWidth: 1
+               }]
+            },
+            options: {
+               responsive: true,
+               plugins: {
+                     legend: {
+                        position: 'bottom'
+                     }
+               }
+            }
+         });
+
+      </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
    </body>
 </html>
