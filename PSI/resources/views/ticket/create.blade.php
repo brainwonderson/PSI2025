@@ -28,8 +28,8 @@
                             @csrf
                             
                             <div class="mb-3">
-                                <label class="form-label">Nama</label>
-                                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}" required>
+                                <label class="form-label">Nama (maks.50 karakter)</label>
+                                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}" required maxlength="50">
                                 @error('nama') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
 
@@ -74,8 +74,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">No. Telp</label>
-                                <input type="tel" name="no_telp" class="form-control @error('no_telp') is-invalid @enderror" value="{{ old('no_telp') }}" required>
+                                <label class="form-label">No. Telp (maks 13 karakter)</label>
+                                <input type="tel" name="no_telp" class="form-control @error('no_telp') is-invalid @enderror" value="{{ old('no_telp') }}" required maxlength="13">
                                 @error('no_telp') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
 

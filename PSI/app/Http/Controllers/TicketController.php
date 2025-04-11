@@ -50,14 +50,14 @@ class TicketController extends Controller
     {
         //validate form
         $request->validate([
-            'nama' => 'required',
+            'nama' => 'required|max:50',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'email' => 'required',
             'negara' => 'required',
             'provinsi' => 'required',
             'kota' => 'required',
-            'no_telp' => 'required',
+            'no_telp' => 'required|max:13',
             'no_fax' => 'required',
             'pekerjaan' => 'required',
             'usia' => 'required',
@@ -130,14 +130,14 @@ class TicketController extends Controller
     {
         //validate form
         $request->validate([
-            'nama' => 'required',
+            'nama' => 'required|max:50',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'email' => 'required',
             'negara' => 'required',
             'provinsi' => 'required',
             'kota' => 'required',
-            'no_telp' => 'required',
+            'no_telp' => 'required|max:13',
             'no_fax' => 'required',
             'pekerjaan' => 'required',
             'usia' => 'required',

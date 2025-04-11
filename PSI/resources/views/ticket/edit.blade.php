@@ -33,7 +33,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Alamat</label>
-                                <textarea name="alamat" class="form-control" rows="2">{{ $ticket->alamat }}</textarea>
+                                <input type="text" name="alamat" class="form-control" value="{{ $ticket->alamat }}" required>
                             </div>
 
                             <div class="mb-3">
