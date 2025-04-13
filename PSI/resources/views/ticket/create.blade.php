@@ -103,11 +103,16 @@
                                 @error('layanan') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
 
+                            @php
+                                $today = \Carbon\Carbon::now()->format('Y-m-d');
+                            @endphp
+                        
                             <div class="mb-3">
                                 <label class="form-label">Tanggal</label>
-                                <input type="date" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}" required>
+                                <input type="date" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}" min="{{ $today }}" required>
                                 @error('tanggal') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
+                            
 
                             <div class="mb-3">
                                 <label class="form-label">Petugas</label>

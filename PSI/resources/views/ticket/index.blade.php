@@ -80,6 +80,7 @@
                             </table>
                         </div> <!-- /.table-responsive -->
 
+                        <a href="{{ route('account.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
                     </div>
                 </div> <!-- /.card -->
             </div>

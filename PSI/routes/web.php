@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home;
+use App\Http\Controllers\WhatsAppController;
 use Illuminate\Support\Facades\Http;
 
 Route::get('/', function () {
@@ -31,15 +32,15 @@ Route::group(['prefix' => 'account'], function(){
 Route::resource('/tickets', \App\Http\Controllers\TicketController::class);
 // Route::get('meet', [Home::class, 'test'])->name('meet');
 
-Route::get('send-wa', function(){
-    $response = Http::withHeaders([
-        'Authorization' => 'sJKyRptUdnqLVpKCHHvF',
-    ])->post('https://api.fonnte.com/send' , [
-        'target' => '6282298630250',
-        'message' => 'https://us04web.zoom.us/j/77013509340?pwd=AG3L6fTR3WoyDdb2hBT9FJKlRysbih.1',
-    ]);
-    dd(json_decode($response, true));
-});
+// Route::get('send-wa', function(){
+//     $response = Http::withHeaders([
+//         'Authorization' => 'sJKyRptUdnqLVpKCHHvF',
+//     ])->post('https://api.fonnte.com/send' , [
+//         'target' => '6282298630250',
+//         'message' => 'https://us04web.zoom.us/j/77013509340?pwd=AG3L6fTR3WoyDdb2hBT9FJKlRysbih.1',
+//     ]);
+//     dd(json_decode($response, true));
+// });
 
 Route::post('meet', [Home::class, 'createMeeting'])->name('meet');
 Route::get('meet', function () {
@@ -48,8 +49,8 @@ Route::get('meet', function () {
 
 Route::post('meet', [Home::class, 'createMeeting'])->name('meet');
 
-
-
+Route::get('send-wa', [WhatsAppController::class, 'showForm']);
+Route::post('send-wa', [WhatsAppController::class, 'sendMessage'])->name('send-wa');
 
 
 
