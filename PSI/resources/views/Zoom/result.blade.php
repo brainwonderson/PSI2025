@@ -1,5 +1,3 @@
-<!-- resources/views/zoom/result.blade.php -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +18,18 @@
             <p><strong>Password:</strong> {{ $response['password'] ?? '-' }}</p>
         </div>
     </div>
-    <a href="{{ route('account.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+
+    <div class="d-flex justify-content-between mt-3">
+        <a href="{{ route('account.dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+
+        {{-- Contoh tombol untuk mengirim WA --}}
+        <form action="{{ route('send-wa') }}" method="POST">
+            @csrf
+            <input type="hidden" name="target" value="085362025601">
+            <input type="hidden" name="message" value="{{ $response['join_url'] ?? 'No Link' }}">
+            <button type="submit" class="btn btn-success">Send WhatsApp</button>
+        </form>
+    </div>
+
 </body>
 </html>

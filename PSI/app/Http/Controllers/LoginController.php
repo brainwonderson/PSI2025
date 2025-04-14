@@ -70,7 +70,7 @@ class LoginController extends Controller
             $user->password = Hash::make($request->password);
             $user->role = 'petugas';
             $user->save();
-            return redirect()->route('account.login')->with(['success' => 'Register success']);
+            return redirect()->route('account.login')->with('registerSuccess', true);
         } else{
             return redirect()->route('account.register')->withInput()->withErrors($validator);
         }
