@@ -25,7 +25,7 @@
         {{-- Contoh tombol untuk mengirim WA --}}
         <form action="{{ route('send-wa') }}" method="POST">
             @csrf
-            <input type="hidden" name="target" value="085362025601">
+            <input type="hidden" name="target" value="08116317774">
             <input type="hidden" name="message" value="{{ $response['join_url'] ?? 'No Link' }}">
             <button type="submit" class="btn btn-success">Send WhatsApp</button>
         </form>

@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>BPOM Service Dashboard</title>
       <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <style>
          .sidebar {
@@ -40,11 +41,12 @@
    <body>
       <div class="sidebar">
          <h3>BPOM SERVICE</h3>
-         <a href="#">&#9673; DashBoard</a>
-         <a href="/tickets">&#128196; Tiket</a>
-         <a href="/meet">&#9638; Zoom</a>
-         <a href="/send-wa">&#10148; WhatsApp</a>
-      </div>
+         <a href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
+         <a href="/tickets"><i class="bi bi-ticket-perforated"></i> Tiket</a>
+         <a href="/meet"><i class="bi bi-camera-video"></i> Zoom</a>
+         <a href="/send-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+     </div>
+     
       <div class="content">
          <nav class="navbar navbar-light bg-primary p-2">
             <div class="container-fluid">
@@ -75,65 +77,73 @@
             </div>
             <div class="mt-4">
                <h4>Survey Mutu Pelayanan</h4>
-               <canvas id="surveyChart" width="400" height="400"></canvas>
-            </div>
-         </div>
-      </div>
-      <script>
-         var ctx = document.getElementById('ticketChart').getContext('2d');
-         var ticketChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-               labels: ['Total Tiket', 'Buka Tiket', 'Selesai Tiket'],
-               datasets: [{
-                  label: 'Jumlah Tiket',
-                  data: [{{ $totalTickets }}, {{ $bukaTickets }}, {{ $selesaiTickets }}],
-                  backgroundColor: ['blue', 'green', 'red']
-               }]
-            },
-            options: {
-               responsive: true,
-               scales: {
-                  y: {
-                     beginAtZero: true
-                  }
-               }
-            }
-         });
-
-         var ctxSurvey = document.getElementById('surveyChart').getContext('2d');
-         var surveyChart = new Chart(ctxSurvey, {
-            type: 'pie',
-            data: {
-               labels: [
-                     'Mutu Pelayanan Sangat Baik (88,31 - 100,00)',
-                     'Mutu Pelayanan Baik (76,61 - 88,30)',
-                     'Mutu Pelayanan Kurang Baik (65,00 - 76,60)',
-                     'Mutu Pelayanan Tidak Baik (25,00 - 64,99)'
-               ],
-               datasets: [{
-                     data: [
-                        {{ $surveyData['Sangat Baik'] }},
-                        {{ $surveyData['Baik'] }},
-                        {{ $surveyData['Kurang Baik'] }},
-                        {{ $surveyData['Tidak Baik'] }}
-                     ],
-                     backgroundColor: ['#86B7E1', '#FFFFFF', '#FFC107', '#DC3545'],
-                     borderColor: ['#000', '#000', '#000', '#000'],
-                     borderWidth: 1
-               }]
-            },
-            options: {
-               responsive: true,
-               plugins: {
-                     legend: {
-                        position: 'bottom'
+               <div>
+                  <canvas id="surveyChart" width="400" height="400"></canvas>
+               </div>
+               
+               <script>
+                  var ctx = document.getElementById('ticketChart').getContext('2d');
+                  var ticketChart = new Chart(ctx, {
+                     type: 'bar',
+                     data: {
+                        labels: ['Total Tiket', 'Buka Tiket', 'Selesai Tiket'],
+                        datasets: [{
+                           label: 'Jumlah Tiket',
+                           data: [{{ $totalTickets }}, {{ $bukaTickets }}, {{ $selesaiTickets }}],
+                           backgroundColor: ['blue', 'green', 'red']
+                        }]
+                     },
+                     options: {
+                        responsive: true,
+                        scales: {
+                           y: {
+                              beginAtZero: true
+                           }
+                        }
                      }
-               }
-            }
-         });
-
-      </script>
+                  });
+               
+                  var ctxSurvey = document.getElementById('surveyChart').getContext('2d');
+                  var surveyChart = new Chart(ctxSurvey, {
+                     type: 'pie',
+                     data: {
+                        labels: [
+                              'Mutu Pelayanan Sangat Baik (88,31 - 100,00)',
+                              'Mutu Pelayanan Baik (76,61 - 88,30)',
+                              'Mutu Pelayanan Kurang Baik (65,00 - 76,60)',
+                              'Mutu Pelayanan Tidak Baik (25,00 - 64,99)'
+                        ],
+                        datasets: [{
+                              data: [
+                                 {{ $surveyData['Sangat Baik'] }},
+                                 {{ $surveyData['Baik'] }},
+                                 {{ $surveyData['Kurang Baik'] }},
+                                 {{ $surveyData['Tidak Baik'] }}
+                              ],
+                              backgroundColor: ['#86B7E1', '#FFFFFF', '#FFC107', '#DC3545'],
+                              borderColor: ['#000', '#000', '#000', '#000'],
+                              borderWidth: 1
+                        }]
+                     },
+                     options: {
+                        responsive: false,
+                        maintainAspectRatio: true,
+                        aspectRatio: 1,  
+                        plugins: {
+                           legend: {
+                              position: 'bottom',
+                             
+                              labels: {
+                                 font: {
+                                    size: 10
+                                 },
+                                 boxWidth: 10
+                              }
+                           }
+                        }
+                     }
+                  });
+               </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
    </body>
 </html>

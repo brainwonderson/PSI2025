@@ -65,7 +65,7 @@ class TicketController extends Controller
             'tanggal' => 'required',
             'petugas' => 'required',
             'status' => 'required',
-            'survey' => 'required',
+            'survey' => 'nullable',
         ], [
             'nama.required' => 'Nama wajib diisi.',
             'nama.max' => 'Nama tidak boleh lebih dari 50 karakter.',
@@ -89,7 +89,7 @@ class TicketController extends Controller
             'tanggal' => $request->tanggal,
             'petugas' => $request->petugas,
             'status' => $request->status,
-            'survey' => $request->survey,
+            'survey' => $request->survey ?? 0,
         ]);
 
         return redirect()->route('tickets.index')->with('success', 'Tiket berhasil dibuat');
