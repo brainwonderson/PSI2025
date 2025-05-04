@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\WhatsAppController;
 use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\UmkmController;
+use App\Http\Controllers\LayananController;
+
 
 Route::get('/', function () {
     return view('home');
@@ -52,8 +55,8 @@ Route::post('meet', [Home::class, 'createMeeting'])->name('meet');
 Route::get('send-wa', [WhatsAppController::class, 'showForm']);
 Route::post('send-wa', [WhatsAppController::class, 'sendMessage'])->name('send-wa');
 
-
-
-
-
-
+Route::resource('umkms', \App\Http\Controllers\UmkmController::class);
+Route::get('/umkms/status/{id}/{status}', [UmkmController::class, 'updateStatus'])->name('umkms.updateStatus');
+// web.php
+Route::get('/layanans/create/{umkm}', [LayananController::class, 'create'])->name('layanans.create');
+Route::post('/layanans/store', [LayananController::class, 'store'])->name('layanans.store');
