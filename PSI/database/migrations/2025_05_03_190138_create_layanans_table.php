@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('layanans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('umkm_id')->constrained()->onDelete('cascade');
-            $table->enum('jenis_layanan', ['permintaan informasi', 'pengaduan', 'pengaduan']);
+            $table->enum('jenis_layanan', ['permintaan informasi', 'pengaduan', 'pendampingan']);
             $table->text('isi_layanan');
             $table->date('tanggal_layanan');
             $table->string('petugas_layanan');
             $table->string('zoom')->nullable();
             $table->string('no_telpon');
+            $table->enum('status', ['buka', 'selesai'])->default('buka');
             $table->timestamps();
         });
     }

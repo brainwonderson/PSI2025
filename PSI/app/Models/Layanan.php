@@ -22,6 +22,7 @@ class Layanan extends Model
         'petugas_layanan',
         'zoom',
         'no_telpon',
+        'status',
     ];
 
     

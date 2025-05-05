@@ -49,11 +49,14 @@
                     <div>
                         <label class="block font-medium mb-1 text-gray-700">Jenis Layanan</label>
                         <select name="jenis_layanan" class="w-full px-3 py-2 border rounded-md focus:ring focus:ring-blue-200" required>
-                            <option value="">Pilih</option>
-                            <option value="permintaan informasi">Permintaan Informasi</option>
-                            <option value="pengaduan">Pengaduan</option>
+                            <option value="" disabled selected hidden>Pilih Jenis Layanan</option>
+                            <option value="permintaan informasi" {{ old('jenis_layanan') == 'permintaan informasi' ? 'selected' : '' }}>Permintaan Informasi</option>
+                            <option value="pendampingan" {{ old('jenis_layanan') == 'pendampingan' ? 'selected' : '' }}>Pendampingan</option>
+                            <option value="pengaduan" {{ old('jenis_layanan') == 'pengaduan' ? 'selected' : '' }}>Pengaduan</option>   
                         </select>
-                    </div>
+                        @error('jenis_layanan') <div class="text-red-500 text-sm mt-1">{{ $message }}</div> @enderror
+                    </div>                    
+
                     <div>
                         <label class="block font-medium mb-1 text-gray-700">Petugas Layanan</label>
                         <input type="text" name="petugas_layanan" class="w-full px-3 py-2 border rounded-md focus:ring focus:ring-blue-200" required />

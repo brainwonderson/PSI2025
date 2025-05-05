@@ -60,3 +60,8 @@ Route::get('/umkms/status/{id}/{status}', [UmkmController::class, 'updateStatus'
 // web.php
 Route::get('/layanans/create/{umkm}', [LayananController::class, 'create'])->name('layanans.create');
 Route::post('/layanans/store', [LayananController::class, 'store'])->name('layanans.store');
+Route::resource('layanan', LayananController::class);
+Route::get('/survey/create/{layanans}', [SurveyController::class, 'create'])->name('survey.create');
+
+
+

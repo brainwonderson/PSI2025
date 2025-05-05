@@ -5,9 +5,17 @@ use App\Models\Layanan;
 use App\Models\Umkm;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 
 class LayananController extends Controller
 {
+    
+    public function index() : View
+    {
+        $layanans = Layanan::with('umkm')->get(); // pastikan data status termasuk diambil
+        return view('layanans.index', compact('layanans'));
+    }
+     
     public function create($umkm)
     {
         $umkm = UMKM::findOrFail($umkm);
@@ -32,9 +40,9 @@ class LayananController extends Controller
             'petugas_layanan' => 'required',
             'zoom' => 'nullable',
             'no_telpon' => 'required',
-            'umkm_id' => 'required|exists:umkms,id'
+            
         ]);
-
+    
         Layanan::create([
             'umkm_id' => $request->umkm_id,
             'jenis_layanan' => $request->jenis_layanan,
@@ -43,11 +51,25 @@ class LayananController extends Controller
             'petugas_layanan' => $request->petugas_layanan,
             'zoom' => $request->zoom,
             'no_telpon' => $request->no_telpon,
-            // optional: menyimpan foreign key jika kamu menambahkan relasi umkm_id
         ]);
-        
-
-        return redirect()->route('umkms.index')->with('success', 'Layanan berhasil dibuat.');
+    
+        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil dibuat.');
     }
+
+    public function updateStatus($id, $status)
+    {
+        $validStatuses = ['buka', 'selesai'];
+    
+        if (!in_array($status, $validStatuses)) {
+            return redirect()->back()->with('error', 'Status tidak valid.');
+        }
+    
+        $umkm = Umkm::findOrFail($id);
+        $umkm->status = $status;
+        $umkm->save();
+    
+        return redirect()->back()->with('success', 'Status berhasil diperbarui ke: ' . ucfirst($status));
+    }
+    
 }
 
