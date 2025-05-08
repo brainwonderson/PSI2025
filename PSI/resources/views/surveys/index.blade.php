@@ -8,37 +8,35 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="text-center fw-bold mb-4">Data Layanan</h2>
+        <h2 class="text-center fw-bold mb-4">Data Survey</h2>
         <div class="text-end mb-3">
-            <a href="{{ route('layanan.create') }}" class="btn btn-success">Tambah Layanan</a>
+            {{-- <a href="{{ route('layanan.create') }}" class="btn btn-success">Tambah Layanan</a> --}}
         </div>
 
         <table class="table table-bordered">
             <thead class="table-light">
                 <tr>
-                    <th>No Layanan</th>
-                    <th>Nama UMKM</th>
-                    <th>Tanggal</th>
+                    <th>No Survey</th>
                     <th>Jenis Layanan</th>
-                    <th>Status</th>
+                    <th>Tanggal</th>                    
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($layanans as $index => $layanan)
+                @forelse($surveys as $index => $survey)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $layanan->umkm->nama ?? '-' }}</td>
-                        <td>{{ $layanan->tanggal_layanan }}</td>
-                        <td>{{ $layanan->jenis_layanan }}</td>
+                        {{-- <td>{{ $survey->umkm->nama ?? '-' }}</td> --}}
+                        <td>{{ $survey->jenis_layanan }}</td>
+                        <td>{{ $survey->tanggal_layanan }}</td>
                         {{-- <td>{{ $layanan->status }}</td> --}}
-                        <td>
+                        {{-- <td>
                             @if ($layanan->status === 'buka')
                                 <span class="badge bg-success">Buka</span>
-                            @elseif ($layanan->status === 'selesai')
+                            @elseif ($laya  an->status === 'selesai')
                                 <span class="badge bg-secondary">Selesai</span>
                             @endif
-                        </td>
+                        </td> --}}
                         <td>
                             <a href="{{ route('survey.create', ['layanan' => $layanan->id]) }}" class="btn btn-primary btn-sm">Survey</a>
                             <a href="{{ route('layanan.edit', $layanan->id) }}" class="btn btn-sm btn-primary">Edit</a>

@@ -8,7 +8,7 @@ use App\Http\Controllers\WhatsAppController;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\LayananController;
-
+use App\Http\Controllers\SurveyController;
 
 Route::get('/', function () {
     return view('home');
@@ -61,7 +61,11 @@ Route::get('/umkms/status/{id}/{status}', [UmkmController::class, 'updateStatus'
 Route::get('/layanans/create/{umkm}', [LayananController::class, 'create'])->name('layanans.create');
 Route::post('/layanans/store', [LayananController::class, 'store'])->name('layanans.store');
 Route::resource('layanan', LayananController::class);
-Route::get('/survey/create/{layanans}', [SurveyController::class, 'create'])->name('survey.create');
+Route::resource('surveys', \App\Http\Controllers\SurveyController::class);
+Route::get('/survey/create/{layanan}', [SurveyController::class, 'create'])->name('survey.create');
+Route::post('/generate-zoom', [App\Http\Controllers\Home::class, 'generateZoom'])->name('zoom.generate');
+
+
 
 
 

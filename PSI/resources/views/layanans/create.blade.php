@@ -1,3 +1,4 @@
+@
 <!DOCTYPE html>
 <html lang="id">
     <head>
@@ -71,9 +72,15 @@
                     </div>
                     <div>
                         <label class="block font-medium mb-1 text-gray-700">Zoom</label>
-                        <input type="text" name="zoom" class="w-full px-3 py-2 border rounded-md" />
+                        <div class="flex gap-2">
+                            <input type="text" name="zoom" id="zoom_input" class="w-full px-3 py-2 border rounded-md" readonly />
+                            <button type="button" id="generate_zoom_btn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
+                                Generate
+                            </button>
+                        </div>
+                        <small id="zoom_status" class="text-sm text-gray-500"></small>
                     </div>
-                    <div>
+                    
                         <label class="block font-medium mb-1 text-gray-700">Whatsapp</label>
                         <input type="text" name="no_telpon" class="w-full px-3 py-2 border rounded-md focus:ring focus:ring-blue-200" required />
                     </div>
@@ -88,6 +95,37 @@
             </div>
         </form>
     </div>
+    <script>
+        document.getElementById("generate_zoom_btn").addEventListener("click", function () {
+            const status = document.getElementById("zoom_status");
+            status.innerText = "Generating Zoom link...";
+            
+            fetch("{{ route('zoom.generate') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    topic: "Layanan UMKM",
+                    duration: 60
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.join_url) {
+                    document.getElementById("zoom_input").value = data.join_url;
+                    status.innerText = "Zoom link generated successfully.";
+                } else {
+                    status.innerText = "Failed to generate Zoom link.";
+                }
+            })
+            .catch(err => {
+                status.innerText = "Error generating Zoom link.";
+            });
+        });
+        </script>
+        
 
 </body>
 </html>
