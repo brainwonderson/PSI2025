@@ -64,6 +64,7 @@ Route::resource('layanan', LayananController::class);
 Route::resource('surveys', \App\Http\Controllers\SurveyController::class);
 Route::get('/survey/create/{layanan}', [SurveyController::class, 'create'])->name('survey.create');
 Route::post('/generate-zoom', [App\Http\Controllers\Home::class, 'generateZoom'])->name('zoom.generate');
+Route::post('/generate-zoom-link', [Home::class, 'generateZoomLink'])->name('generate.zoom.link');
 
 
 

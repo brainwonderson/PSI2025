@@ -48,5 +48,25 @@ class Home extends Controller
     }
 }
 
+public function generateZoomLink(Request $request)
+{
+    try {
+        $zoom = new \App\Library\Zoom_Api();
+        $data = [
+            'topic'      => 'Layanan ID ' . $request->id,
+            'start_date' => date("Y-m-d H:i:s", strtotime('+1 day')),
+            'duration'   => 60,
+            'type'       => 2,
+            'password'   => '123456',
+        ];
+
+        $response = $zoom->createMeeting($data);
+
+        return response()->json(['join_url' => $response['join_url'] ?? null]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
+
     
 }
