@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('petugas_layanan');
             $table->string('zoom')->nullable();
             $table->string('no_telpon');
+            $table->string('pesan')->nullable();
             $table->enum('status', ['buka', 'selesai'])->default('buka');
             $table->timestamps();
         });

@@ -14,20 +14,20 @@ class WhatsAppController extends Controller
 
     public function sendMessage(Request $request)
     {
+        $data = $request->isJson() ? $request->json()->all() : $request->all();
+    
         $request->validate([
             'target' => 'required',
             'message' => 'required',
         ]);
-
+    
         $response = Http::withHeaders([
             'Authorization' => 'sJKyRptUdnqLVpKCHHvF',
         ])->post('https://api.fonnte.com/send', [
-            'target' => $request->input('target'),
-            'message' => $request->input('message'),
+            'target' => $data['target'],
+            'message' => $data['message'],
         ]);
-
-        $result = json_decode($response, true);
-
-        return back()->with('status', $result);
+    
+        return response()->json(json_decode($response, true));
     }
-}
+}   

@@ -66,7 +66,6 @@ Route::get('/survey/create/{layanan}', [SurveyController::class, 'create'])->nam
 Route::post('/generate-zoom', [App\Http\Controllers\Home::class, 'generateZoom'])->name('zoom.generate');
 Route::post('/generate-zoom-link', [Home::class, 'generateZoomLink'])->name('generate.zoom.link');
 
-
-
+Route::get('/surveys', [SurveyController::class, 'index'])->name('surveys.index');
 
 

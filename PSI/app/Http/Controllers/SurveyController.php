@@ -18,7 +18,7 @@ class SurveyController extends Controller
      public function index()
      {
         $surveys = Survey::latest()->paginate(10);
-         return view('survey.create', compact('layanan'));
+         return view('surveys.index', compact('surveys'));
      }
 
      /**
@@ -58,10 +58,48 @@ class SurveyController extends Controller
             'layanan_id' => $request->layanan_id,
             'survey' => $request->survey,
             'komentar' => $request->komentar,
+            session()->put('last_layanan_id', $request->layanan_id),
+
         ]);
 
         return redirect()->route('surveys.index')->with('success', 'Survey created successfully.');
      }
+
+     public function show($id)
+    {
+        $survey = Survey::with('layanan.umkm')->findOrFail($id);
+        return view('surveys.show', compact('survey'));
+    }
+
+    /**
+     * edit
+     *
+     * @param  mixed $id
+     * @return View
+     */
+
+     public function edit($id)
+    {
+        $survey = Survey::findOrFail($id);
+        return view('surveys.edit', compact('survey'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $survey = Survey::findOrFail($id);
+
+        $request->validate([
+            'survey' => 'required|integer|min:1|max:5',
+            'komentar' => 'nullable|string|max:255',
+        ]);
+
+        $survey->update([
+            'survey' => $request->survey,
+            'komentar' => $request->komentar,
+        ]);
+
+        return redirect()->route('surveys.index')->with('success', 'Survey updated successfully.');
+    }
 
 
 }

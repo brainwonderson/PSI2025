@@ -40,6 +40,7 @@ class LayananController extends Controller
             'petugas_layanan' => 'required',
             'zoom' => 'nullable',
             'no_telpon' => 'required',
+            'pesan' => 'nullable|string|max:255',
             
         ]);
     
@@ -51,6 +52,7 @@ class LayananController extends Controller
             'petugas_layanan' => $request->petugas_layanan,
             'zoom' => $request->zoom,
             'no_telpon' => $request->no_telpon,
+            'pesan' => $request->pesan,
         ]);
     
         return redirect()->route('layanan.index')->with('success', 'Layanan berhasil dibuat.');

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('layanan_id')->constrained()->onDelete('cascade');
             $table->integer('survey');
-            $table->text('komentar');
+            $table->string('komentar')->nullable();
             $table->timestamps();
         });
     }

@@ -70,7 +70,14 @@
                         <label class="block font-medium mb-1 text-gray-700">Tanggal Layanan</label>
                         <input type="date" name="tanggal_layanan" class="w-full px-3 py-2 border rounded-md focus:ring focus:ring-blue-200" required />
                     </div>
+
                     <div>
+                        <label class="block font-medium mb-1 text-gray-700">Pesan</label>
+                        <textarea type="text" name="pesan" class="w-full px-3 py-2 border rounded-md focus:ring focus:ring-blue-200" required></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block font-medium mb-1 text-gray-700">Zoom</label>
                         <div class="flex items-center gap-2">
                             <input type="text" name="zoom" id="zoom_link" class="w-full px-3 py-2 border rounded-md" readonly />
                             <button type="button" onclick="generateZoom()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">
@@ -147,30 +154,66 @@
         });
     }
     </script>
-    <script>
-        function generateZoom() {
-            fetch("{{ route('generate.zoom.link') }}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                },
-                body: JSON.stringify({ id: "{{ $umkm->id }}" })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if(data.join_url){
-                    document.getElementById("zoom_link").value = data.join_url;
-                } else {
-                    alert("Gagal generate Zoom link");
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                alert("Terjadi kesalahan saat generate Zoom link.");
-            });
-        }
-        </script>
+<script>
+    function generateZoom() {
+        fetch("{{ route('generate.zoom.link') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ id: "{{ $umkm->id }}" })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.join_url){
+                const zoomLink = data.join_url;
+                document.getElementById("zoom_link").value = zoomLink;
+    
+                // Ambil nomor dan pesan dari inputan form
+                const phone = document.querySelector('input[name="no_telpon"]').value;
+                const message = document.querySelector('textarea[name="pesan"]').value;
+    
+                // Format pesan WA
+                const fullMessage = `${message}\n\nLink Zoom: ${zoomLink}`;
+    
+                // Kirim ke controller Laravel untuk proses kirim WA
+                fetch("{{ route('send-wa') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({
+                        target: phone,
+                        message: fullMessage
+                    })
+                })
+                .then(res => res.json())
+                .then(result => {
+                    if(result.status === true || result.success){
+                        alert("Pesan WhatsApp berhasil dikirim!");
+                    } else {
+                        alert("Gagal mengirim pesan WhatsApp.");
+                        console.error(result);
+                    }
+                })
+                .catch(err => {
+                    alert("Error saat mengirim WhatsApp.");
+                    console.error(err);
+                });
+    
+            } else {
+                alert("Gagal generate Zoom link");
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Terjadi kesalahan saat generate Zoom link.");
+        });
+    }
+    </script>
+    
         
 
 </body>

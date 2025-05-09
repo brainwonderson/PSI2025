@@ -33,11 +33,7 @@
                     <label class="form-label">Isi Layanan</label>
                     <input type="text" class="form-control" value="{{ $layanan->isi_layanan }}" readonly>
                 </div>
-                {{-- <div class="col-md-6">
-                    <label class="form-label">Zoom</label>
-                    <input type="text" class="form-control" value="{{ $layanan->zoom }}" readonly>
-                </div>
-            </div> --}}
+            
 
             <div class="row mb-3">
                 <div class="col-md-6">

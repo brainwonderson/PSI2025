@@ -19,4 +19,11 @@ class Survey extends Model
         'survey',
         'komentar',
     ];
+
+
+    public function layanan()
+    {
+        return $this->belongsTo(Layanan::class);
+    }
+
 }
