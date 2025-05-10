@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Layanan;
 use App\Models\Ticket;
+use App\Models\Umkm;
 use Illuminate\View\View;
 
 use Illuminate\Http\Request;
@@ -11,9 +14,9 @@ class DashboardController extends Controller
     //
     public function index(): View
     {
-        $totalTickets = Ticket::count();
-        $bukaTickets = Ticket::where('status', 'Buka')->count();
-        $selesaiTickets = Ticket::where('status', 'Selesai')->count();
+        $totalumkm = Umkm::distinct('nama')->count('nama');
+        $LayananAktif = Layanan::where('status', 'Buka')->count();
+        $LayananSelesai = Layanan::where('status', 'Selesai')->count();
 
         $surveyData = [
             'Sangat Baik' => Ticket::whereBetween('survey', [88.31, 100.00])->count(),
@@ -23,7 +26,7 @@ class DashboardController extends Controller
         ];
         
 
-        return view('dashboard', compact('totalTickets', 'bukaTickets', 'selesaiTickets', 'surveyData'));
+        return view('dashboard', compact('totalumkm', 'LayananAktif', 'LayananSelesai', 'surveyData'));
     }
 
 }

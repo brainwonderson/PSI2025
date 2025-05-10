@@ -1,100 +1,70 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Data UMKM</title>
-    <style>
-        body {
-            background-color: #bdbdbd;
-            font-family: Arial, sans-serif;
-        }
+@extends('layouts.app')
 
-        .container {
-            background-color: white;
-            width: 600px;
-            margin: 50px auto;
-            padding: 30px;
-            border-radius: 8px;
-        }
+@section('content')
+<div class="container bg-white p-4 rounded shadow" style="max-width: 700px;">
+    <h2 class="text-center mb-4">Data UMKM</h2>
 
-        h2 {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+    {{-- Menampilkan error validasi --}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-        form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px 20px;
-        }
-
-        input, select {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            width: 100%;
-        }
-
-        .full-width {
-            grid-column: span 2;
-        }
-
-        .button-container {
-            text-align: right;
-            grid-column: span 2;
-        }
-
-        button {
-            padding: 8px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .error {
-            color: red;
-            font-size: 0.9em;
-            grid-column: span 2;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h2>Data UMKM</h2>
-
-    <form action="{{ route('umkms.store') }}" method="POST">
+    <form action="{{ route('umkms.store') }}" method="POST" class="row g-3">
         @csrf
 
-        <input type="text" name="nama" placeholder="Nama" value="{{ old('nama') }}">
-        <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+        <div class="col-md-6">
+            <input type="text" name="nama" class="form-control" placeholder="Nama" value="{{ old('nama') }}">
+        </div>
 
-        <input type="text" name="jenis_kelamin" placeholder="Jenis Kelamin" value="{{ old('jenis_kelamin') }}">
-        <input type="text" name="negara" placeholder="Negara" value="{{ old('negara') }}">
+        <div class="col-md-6">
+            <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}">
+        </div>
 
-        <input type="date" name="tanggal"placeholder="Tanggal" value="{{ old('tanggal') }}">
+        <div class="col-md-6">
+            <input type="text" name="jenis_kelamin" class="form-control" placeholder="Jenis Kelamin" value="{{ old('jenis_kelamin') }}">
+        </div>
 
-        <input type="text" name="instansi" placeholder="Instansi" value="{{ old('instansi') }}">
-        <input type="text" name="provinsi" placeholder="Provinsi" value="{{ old('provinsi') }}">
+        <div class="col-md-6">
+            <input type="text" name="negara" class="form-control" placeholder="Negara" value="{{ old('negara') }}">
+        </div>
 
-        <input type="text" name="jenis_perusahaan" placeholder="Jenis Perusahaan" value="{{ old('jenis_perusahaan') }}">
-        <input type="text" name="kota" placeholder="Kota" value="{{ old('kota') }}">
+        <div class="col-md-6">
+            <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}">
+        </div>
 
-        <input type="text" name="alamat" placeholder="Alamat" value="{{ old('alamat') }}">
-        <input type="text" name="no_fax" placeholder="No Fax" value="{{ old('no_fax') }}">
+        <div class="col-md-6">
+            <input type="text" name="instansi" class="form-control" placeholder="Instansi" value="{{ old('instansi') }}">
+        </div>
 
-        {{-- <input type="date" name="tanggal" placeholder="Tanggal" value="{{ old('tanggal') }}"> --}}
+        <div class="col-md-6">
+            <input type="text" name="provinsi" class="form-control" placeholder="Provinsi" value="{{ old('provinsi') }}">
+        </div>
 
-        <div class="button-container">
-            <button type="submit">Simpan</button>
+        <div class="col-md-6">
+            <input type="text" name="jenis_perusahaan" class="form-control" placeholder="Jenis Perusahaan" value="{{ old('jenis_perusahaan') }}">
+        </div>
+
+        <div class="col-md-6">
+            <input type="text" name="kota" class="form-control" placeholder="Kota" value="{{ old('kota') }}">
+        </div>
+
+        <div class="col-md-6">
+            <input type="text" name="alamat" class="form-control" placeholder="Alamat" value="{{ old('alamat') }}">
+        </div>
+
+        <div class="col-md-6">
+            <input type="text" name="no_fax" class="form-control" placeholder="No Fax" value="{{ old('no_fax') }}">
+        </div>
+
+        <div class="col-12 text-end">
+            <button type="submit" class="btn btn-success">Simpan</button>
         </div>
     </form>
 </div>
-
-</body>
-</html>
+@endsection
