@@ -24,6 +24,9 @@
                 <dt class="col-sm-4">Tanggal Layanan</dt>
                 <dd class="col-sm-8">{{ $survey->layanan->tanggal_layanan ?? '-' }}</dd>
 
+                <dt class="col-sm-4">Petugas Layanan</dt>
+                <dd class="col-sm-8">{{ $survey->layanan->petugas_layanan ?? '-' }}</dd>
+
                 <dt class="col-sm-4">Rating</dt>
                 <dd class="col-sm-8">{{ $survey->survey }}</dd>
             </dl>

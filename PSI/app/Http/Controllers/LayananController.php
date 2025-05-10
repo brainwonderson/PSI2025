@@ -4,33 +4,30 @@ namespace App\Http\Controllers;
 use App\Models\Layanan;
 use App\Models\Umkm;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class LayananController extends Controller
 {
-    
-    public function index() : View
+    public function index(): View
     {
-        $layanans = Layanan::with('umkm')->get(); // pastikan data status termasuk diambil
+        $layanans = Layanan::with('umkm')->get();
         return view('layanans.index', compact('layanans'));
     }
-     
-    public function create($umkm)
+
+    public function create($umkmId): View
     {
-        $umkm = UMKM::findOrFail($umkm);
-    
-        // Optionally update status ke 'verifikasi' di sini
+        $umkm = Umkm::findOrFail($umkmId);
+
         if ($umkm->status !== 'verifikasi') {
             $umkm->status = 'verifikasi';
             $umkm->save();
         }
-    
+
         return view('layanans.create', compact('umkm'));
     }
-    
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'umkm_id' => 'required|exists:umkms,id',
@@ -41,37 +38,52 @@ class LayananController extends Controller
             'zoom' => 'nullable',
             'no_telpon' => 'required',
             'pesan' => 'nullable|string|max:255',
-            
         ]);
-    
-        Layanan::create([
-            'umkm_id' => $request->umkm_id,
-            'jenis_layanan' => $request->jenis_layanan,
-            'isi_layanan' => $request->isi_layanan,
-            'tanggal_layanan' => $request->tanggal_layanan,
-            'petugas_layanan' => $request->petugas_layanan,
-            'zoom' => $request->zoom,
-            'no_telpon' => $request->no_telpon,
-            'pesan' => $request->pesan,
-        ]);
-    
-        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil dibuat.');
+
+        Layanan::create($request->all());
+
+        return redirect()->route('layanans.index')->with('success', 'Layanan berhasil dibuat.');
     }
 
-    public function updateStatus($id, $status)
+    public function updateStatus($id, $status): RedirectResponse
     {
         $validStatuses = ['buka', 'selesai'];
-    
+
         if (!in_array($status, $validStatuses)) {
             return redirect()->back()->with('error', 'Status tidak valid.');
         }
-    
-        $umkm = Umkm::findOrFail($id);
-        $umkm->status = $status;
-        $umkm->save();
-    
-        return redirect()->back()->with('success', 'Status berhasil diperbarui ke: ' . ucfirst($status));
-    }
-    
-}
 
+        $layanan = Layanan::findOrFail($id);
+        $layanan->status = $status;
+        $layanan->save();
+
+        return redirect()->back()->with('success', 'Status layanan diperbarui ke: ' . ucfirst($status));
+    }
+
+    public function edit($id): View
+    {
+        $layanan = Layanan::findOrFail($id);
+        return view('layanans.edit', compact('layanan'));
+    }
+
+    public function update(Request $request, $id): RedirectResponse
+    {
+        $request->validate([
+            'jenis_layanan' => 'required|string|max:255',
+            'isi_layanan' => 'required|string',
+            'tanggal_layanan' => 'required|date',
+            'petugas_layanan' => 'required|string|max:255',
+            'zoom' => 'nullable|string|max:255',
+            'no_telpon' => 'required|string|max:20',
+            'pesan' => 'nullable|string|max:255',
+            'status' => 'required|in:buka,selesai',
+        ]);
+
+        $layanan = Layanan::findOrFail($id);
+        $layanan->update($request->all());
+
+        return redirect()->route('layanans.index')->with('success', 'Data layanan berhasil diperbarui.');
+    }
+
+
+}

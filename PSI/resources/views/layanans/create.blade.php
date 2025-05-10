@@ -13,7 +13,7 @@
     <div class="max-w-6xl mx-auto bg-white shadow-lg rounded-2xl p-8">
         <h2 class="text-3xl font-bold text-center text-blue-800 mb-8">Form Tambah Layanan</h2>
 
-        <form action="{{ route('layanans.store') }}" method="POST" class="space-y-8">
+        <form action="{{ route('umkms.layanans.store', ['umkm' => $umkm->id]) }}" method="POST">
             @csrf
             <input type="hidden" name="umkm_id" value="{{ $umkm->id }}">
 

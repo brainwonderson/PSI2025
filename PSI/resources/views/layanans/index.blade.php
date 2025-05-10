@@ -10,7 +10,7 @@
     <div class="container mt-5">
         <h2 class="text-center fw-bold mb-4">Data Layanan</h2>
         <div class="text-end mb-3">
-            <a href="{{ route('layanan.create') }}" class="btn btn-success">Tambah Layanan</a>
+            {{-- <a href="{{ route('umkms.layanans.create', ['umkm' => $umkm->id]) }}">Tambah Layanan</a> --}}
         </div>
 
         <table class="table table-bordered">
@@ -40,9 +40,9 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('survey.create', ['layanan' => $layanan->id]) }}" class="btn btn-primary btn-sm">Survey</a>
-                            <a href="{{ route('layanan.edit', $layanan->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                            <form action="{{ route('layanan.destroy', $layanan->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin hapus?')">
+                            <a href="{{ route('umkms.layanans.surveys.create', ['umkm' => $layanan->umkm_id, 'layanan' => $layanan->id]) }}" class="btn btn-primary btn-sm">Survey</a>
+                            <a href="{{ route('layanans.edit', $layanan->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                            {{-- <form action="{{ route('layanan.destroy', $layanan->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin hapus?')"> --}}
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger">Hapus</button>

@@ -55,17 +55,35 @@ Route::post('meet', [Home::class, 'createMeeting'])->name('meet');
 Route::get('send-wa', [WhatsAppController::class, 'showForm']);
 Route::post('send-wa', [WhatsAppController::class, 'sendMessage'])->name('send-wa');
 
-Route::get('/umkms/status/{id}/{status}', [UmkmController::class, 'updateStatus'])->name('umkms.updateStatus');
-Route::resource('umkms', \App\Http\Controllers\UmkmController::class);
-// web.php
-Route::get('/layanans/create/{umkm}', [LayananController::class, 'create'])->name('layanans.create');
-Route::post('/layanans/store', [LayananController::class, 'store'])->name('layanans.store');
-Route::resource('layanan', LayananController::class);
-Route::resource('surveys', \App\Http\Controllers\SurveyController::class);
-Route::get('/survey/create/{layanan}', [SurveyController::class, 'create'])->name('survey.create');
+// Route::get('/umkms/status/{id}/{status}', [UmkmController::class, 'updateStatus'])->name('umkms.updateStatus');
+// Route::resource('umkms', \App\Http\Controllers\UmkmController::class);
+// // web.php
+// Route::get('/layanans/create/{umkm}', [LayananController::class, 'create'])->name('layanans.create');
+// Route::post('/layanans/store', [LayananController::class, 'store'])->name('layanans.store');
+// Route::resource('layanan', LayananController::class);
+// Route::resource('surveys', \App\Http\Controllers\SurveyController::class);
+// Route::get('/survey/create/{layanan}', [SurveyController::class, 'create'])->name('survey.create');
 Route::post('/generate-zoom', [App\Http\Controllers\Home::class, 'generateZoom'])->name('zoom.generate');
 Route::post('/generate-zoom-link', [Home::class, 'generateZoomLink'])->name('generate.zoom.link');
 
-Route::get('/surveys', [SurveyController::class, 'index'])->name('surveys.index');
+// Route::get('/surveys', [SurveyController::class, 'index'])->name('surveys.index');
+
+// UMKM routes
+Route::resource('umkms', UmkmController::class);
+Route::get('umkms/status/{id}/{status}', [UmkmController::class, 'updateStatus'])->name('umkms.updateStatus');
+
+// Nested: Layanan routes under UMKM
+Route::prefix('umkms/{umkm}')->group(function () {
+    Route::get('layanans/create', [LayananController::class, 'create'])->name('umkms.layanans.create');
+    Route::post('layanans', [LayananController::class, 'store'])->name('umkms.layanans.store');
+
+    // Nested: Survey routes under UMKM & Layanan
+    Route::get('layanans/{layanan}/surveys/create', [SurveyController::class, 'create'])->name('umkms.layanans.surveys.create');
+});
+
+// Global index & CRUD
+Route::resource('layanans', LayananController::class)->except(['create', 'store']);
+Route::resource('surveys', SurveyController::class)->except(['create']);
+
 
 

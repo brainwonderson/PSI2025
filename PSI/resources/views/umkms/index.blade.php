@@ -43,7 +43,7 @@
                         </td>
                         <td>
                             <div class="d-flex flex-wrap gap-1">
-                                <a href="{{ route('layanans.create', ['umkm' => $umkm->id]) }}" class="btn btn-primary btn-sm">Lanjut</a>
+                               <a href="{{ route('umkms.layanans.create', ['umkm' => $umkm->id]) }}" class="btn btn-primary btn-sm">Lanjut</a>
                                 <a href="{{ route('umkms.edit', $umkm->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <a href="{{ route('umkms.updateStatus', ['id' => $umkm->id, 'status' => 'cancel']) }}" class="btn btn-danger btn-sm">Cancel</a>
                             </div>
